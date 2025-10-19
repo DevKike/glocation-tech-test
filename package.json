@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "start:dev": "NODE_ENV=dev dotenv -e .env.dev npx nodemon src/index.js",
-    "start:prod": "NODE_ENV=prod dotenv -e .env.prod node src/index.js",
+    "start:prod": "docker compose --env-file .env.prod up --build",
     "migration:generate": "sequelize-cli migration:generate",
     "migration:run": "sequelize-cli db:migrate",
     "migration:undo": "sequelize-cli db:migrate:undo"
