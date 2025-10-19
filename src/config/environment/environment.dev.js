@@ -1,6 +1,7 @@
 const { config } = require('dotenv');
 
-config();
+const env = process.env.NODE_ENV || 'dev';
+config({ path: `.env.${env}` });
 
 const environment = {
   SERVER_PORT: process.env.SERVER_PORT,

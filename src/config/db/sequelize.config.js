@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 const setupModel = require('../../db/setup-model');
-const environment = require('../environment/environment.local');
+const environment = require('../environment/environment.dev');
 
 const sequelize = new Sequelize(
   environment.DB_NAME,

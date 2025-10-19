@@ -1,5 +1,5 @@
 const path = require('path');
-const environments = require('../environment/environment.local');
+const environments = require('../environment/environment.dev');
 
 const swaggerConfig = {
   definition: {
