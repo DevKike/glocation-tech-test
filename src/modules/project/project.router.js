@@ -5,6 +5,7 @@ const schemaValidator = require('../../middlewares/schema-validator.middleware')
 const {
   createProjectSchema,
   updateProjectSchema,
+  getProjectByStatusSchema,
 } = require('./schema/project.schema');
 
 const projectRouter = express.Router();
@@ -31,6 +32,19 @@ projectRouter.get('/', async (req, res) => {
   );
 });
 
+projectRouter.get(
+  '/graphics',
+  schemaValidator(getProjectByStatusSchema),
+  async (req, res) => {
+    await responseManager(
+      res,
+      projectController.getByStatus(req.body.status),
+      200,
+      'Graphics were obtained with success!'
+    );
+  }
+);
+
 projectRouter.get('/:id', async (req, res) => {
   await responseManager(
     res,
@@ -50,16 +64,16 @@ projectRouter.patch(
       200,
       'Project was updated with success!'
     );
-  },
-
-  projectRouter.delete('/:id', async (req, res) => {
-    await responseManager(
-      res,
-      projectController.delete(req.params.id),
-      200,
-      'Project was deleted with success!'
-    );
-  })
+  }
 );
+
+projectRouter.delete('/:id', async (req, res) => {
+  await responseManager(
+    res,
+    projectController.delete(req.params.id),
+    200,
+    'Project was deleted with success!'
+  );
+});
 
 module.exports = projectRouter;

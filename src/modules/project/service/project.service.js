@@ -9,6 +9,12 @@ const projectService = {
     return Project.findAll();
   },
 
+  findBy: async (field, value) => {
+    return Project.findAndCountAll({
+      where: { [field]: value },
+    });
+  },
+
   findById: async (id) => {
     return Project.findByPk(id);
   },

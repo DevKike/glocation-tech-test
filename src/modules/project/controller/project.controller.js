@@ -1,6 +1,5 @@
 const projectService = require('../service/project.service');
 const NotFoundException = require('../../../exceptions/not-found.exception');
-const BadRequestException = require('../../../exceptions/bad-request.exception');
 
 const projectController = {
   create: async (data) => {
@@ -12,6 +11,17 @@ const projectController = {
 
     if (!projects || projects.length === 0)
       throw new NotFoundException('Not projects were found');
+
+    return projects;
+  },
+
+  getByStatus: async (status) => {
+    const projects = await projectService.findBy('status', status);
+
+    if (!projects || projects.count === 0)
+      throw new NotFoundException(
+        `Not projects by status ${status} were found`
+      );
 
     return projects;
   },
