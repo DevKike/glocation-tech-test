@@ -11,6 +11,7 @@ const ENVIRONMENT = {
   DB_HOST: process.env.DB_HOST,
   DB_DIALECT: process.env.DB_DIALECT,
   DB_PORT: process.env.DB_PORT,
+  OPEN_ROUTER_API_KEY: process.env.OPEN_ROUTER_API_KEY,
   FRONTEND_URL: process.env.FRONTEND_URL,
 };
 
