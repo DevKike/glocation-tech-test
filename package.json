@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "start:dev": "NODE_ENV=dev dotenv -e .env.dev npx nodemon src/index.js",
+    "docker-compose-run:dev": "docker compose --env-file .env.dev -f docker-compose.dev.yml up -d",
+    "docker-compose-stop:dev": "docker compose --env-file .env.dev -f docker-compose.dev.yml down",
+    "start:dev": "npm run docker-compose-run:dev && NODE_ENV=dev dotenv -e .env.dev npx nodemon src/index.js",
     "start:prod": "docker compose --env-file .env.prod up --build",
     "migration:generate": "sequelize-cli migration:generate",
     "migration:run": "sequelize-cli db:migrate",
@@ -16,6 +18,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "joi": "^18.0.1",

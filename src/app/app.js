@@ -3,11 +3,14 @@ const projectRouter = require('../modules/project/project.router');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerConfig = require('../config/swagger/swagger.config');
 const swaggerUi = require('swagger-ui-express');
+const cors = require('cors');
+const ENVIRONMENT = require('../config/environment/environment');
 
 const app = express();
 
 const swaggerDocs = swaggerJSDoc(swaggerConfig);
 
+app.use(cors({ origin: ENVIRONMENT.FRONTEND_URL }));
 app.use(express.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));

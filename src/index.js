@@ -1,8 +1,8 @@
-const environment = require('./config/environment/environment.dev');
+const ENVIRONMENT = require('./config/environment/environment');
 const app = require('./app/app');
 const sequelize = require('./config/db/sequelize.config');
 
-const PORT = environment.SERVER_PORT;
+const PORT = ENVIRONMENT.SERVER_PORT;
 
 app.listen(PORT, async () => {
   try {

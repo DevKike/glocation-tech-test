@@ -1,15 +1,15 @@
 const { Sequelize } = require('sequelize');
 const setupModel = require('../../db/setup-model');
-const environment = require('../environment/environment.dev');
+const ENVIRONMENT = require('../environment/environment');
 
 const sequelize = new Sequelize(
-  environment.DB_NAME,
-  environment.DB_USER,
-  environment.DB_PASSWORD,
+  ENVIRONMENT.DB_NAME,
+  ENVIRONMENT.DB_USER,
+  ENVIRONMENT.DB_PASSWORD,
   {
-    host: environment.DB_HOST,
-    port: environment.DB_PORT,
-    dialect: environment.DB_DIALECT,
+    host: ENVIRONMENT.DB_HOST,
+    port: ENVIRONMENT.DB_PORT,
+    dialect: ENVIRONMENT.DB_DIALECT,
     logging: false,
   }
 );

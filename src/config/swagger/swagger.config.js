@@ -1,5 +1,5 @@
 const path = require('path');
-const environments = require('../environment/environment.dev');
+const ENVIRONMENT = require('../environment/environment');
 
 const swaggerConfig = {
   definition: {
@@ -11,7 +11,7 @@ const swaggerConfig = {
     },
     servers: [
       {
-        url: `http://localhost:${environments.SERVER_PORT}`,
+        url: `http://localhost:${ENVIRONMENT.SERVER_PORT}`,
       },
     ],
     components: {
