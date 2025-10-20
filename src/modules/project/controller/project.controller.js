@@ -1,5 +1,7 @@
 const projectService = require('../service/project.service');
 const NotFoundException = require('../../../exceptions/not-found.exception');
+const openAIUtil = require('../../../utils/open-ai.util');
+const buildOpenAIPrompt = require('../../../helpers/build-open-ai-prompt.helper');
 
 const projectController = {
   create: async (data) => {
@@ -16,14 +18,21 @@ const projectController = {
   },
 
   getByStatus: async (status) => {
-    const projects = await projectService.findBy('status', status);
+    const data = await projectService.findBy('status', status);
 
-    if (!projects || projects.count === 0)
+    if (!data || data.count === 0)
       throw new NotFoundException(
         `Not projects by status ${status} were found`
       );
 
-    return projects;
+    const projects = data.rows.map((project) => project.dataValues);
+
+    const feedback = await projectController.getFeedback(projects);
+
+    return {
+      projects,
+      feedback,
+    };
   },
 
   getById: async (id) => {
@@ -45,6 +54,11 @@ const projectController = {
     await projectController.getById(id);
 
     return projectService.delete(id);
+  },
+
+  getFeedback: async (projects) => {
+    const prompt = buildOpenAIPrompt(projects);
+    return openAIUtil.useModel(prompt);
   },
 };
 
