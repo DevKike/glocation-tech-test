@@ -14,7 +14,12 @@ const projectController = {
     if (!projects || projects.length === 0)
       throw new NotFoundException('Not projects were found');
 
-    return projects;
+    const feedback = await projectController.getFeedback(projects);
+
+    return {
+      feedback,
+      projects,
+    };
   },
 
   getByStatus: async (status) => {
@@ -30,8 +35,8 @@ const projectController = {
     const feedback = await projectController.getFeedback(projects);
 
     return {
-      projects,
       feedback,
+      projects,
     };
   },
 
